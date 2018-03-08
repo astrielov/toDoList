@@ -1,0 +1,54 @@
+{
+  "name": "tictactoe",
+  "version": "0.0.1",
+  "description": "",
+  "main": "electronMain.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpackStart": "webpack --config webpack.config.js",
+    "electronStart": "electron ."
+  },
+  "eslintConfig": {
+    "extends": "airbnb-base",
+    "rules": {
+      "no-param-reassign": 0
+    },
+    "globals": {
+      "document": true,
+      "window": true,
+      "localStorage": true,
+      "fetch": true,
+      "Option": true,
+      "Event": true,
+      "CustomEvent": true
+    }
+  },
+  "ava": {
+    "require": [
+      "@babel/register"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "@ava/stage-4"
+    ]
+  },
+  "author": "astrielov",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.39",
+    "@babel/register": "^7.0.0-beta.39",
+    "ava": "^0.25.0",
+    "@ava/babel-preset-stage-4": "^1.1.0",
+    "eslint": "^4.15.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.9",
+    "electron": "~1.8.2"
+  },
+  "dependencies": {
+    "todomvc-app-css": "^2.0.0",
+    "todomvc-common": "^1.0.0"
+  }
+}
