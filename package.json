@@ -1,12 +1,12 @@
 {
-  "name": "tictactoe",
+  "name": "toDoList",
   "version": "0.0.1",
   "description": "",
-  "main": "electronMain.js",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpackStart": "webpack --config webpack.config.js",
-    "electronStart": "electron ."
+    "electronStart": "electron ./electron.js"
   },
   "eslintConfig": {
     "extends": "airbnb-base",
@@ -44,11 +44,11 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "webpack": "^4.0.1",
-    "webpack-cli": "^2.0.9",
-    "electron": "~1.8.2"
+    "webpack-cli": "^2.0.9"
   },
   "dependencies": {
     "todomvc-app-css": "^2.0.0",
-    "todomvc-common": "^1.0.0"
+    "todomvc-common": "^1.0.0",
+    "electron": "~1.8.2"
   }
 }
