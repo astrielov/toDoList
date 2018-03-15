@@ -1,17 +1,31 @@
-export default class Templates {
+import { qs } from '../helpers/helpers';
 
-  static item(title, completed) {
-    return `
-    <div class="view">
-      <input class="toggle" type="checkbox">
-      <label>${title}</label>
-      <button class="destroy"></button>
-    </div>
-    <!--<input class="edit" value="${title}">-->`
-      ;
+export default class Templates {
+  static newItemLi(todo) {
+    const li = document.createElement('li');
+
+    li.dataset.id = todo.id;
+    li.innerHTML = `<div class="view">
+                      <input class="toggle" type="checkbox">
+                      <label>${todo.title}</label>
+                      <button class="destroy"></button>
+                    </div>`;
+
+    if (todo.completed) {
+      li.classList.add('completed');
+      qs('.toggle', li).checked = true;
+    }
+
+
+    return li;
   }
 
-  static todoCount(itemsAmount) {
-    return `<strong>${itemsAmount}</strong> item${itemsAmount === 1 ? '': 's'} left`;
+  static newTodoCountSpan(itemsAmount) {
+    const counter = document.createElement('span');
+
+    counter.classList.add('todo-count');
+    counter.innerHTML = `<strong>${itemsAmount}</strong> item${itemsAmount % 10 === 1 ? '' : 's'} left`;
+
+    return counter;
   }
 }

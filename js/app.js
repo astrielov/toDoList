@@ -13,15 +13,3 @@ const controller = new Controller(model, view);
 
 setListener(window, 'load', () => controller.setView());
 setListener(window, 'hashchange', () => controller.setView());
-
-
-
-
-
-
-setListener(window, 'load', () => {
-  console.log(`DOCUMENT LOCATION HASH: ${document.location.hash}`);
-});
-setListener(window, 'hashchange', () => {
-  console.log(`DOCUMENT LOCATION HASH: ${document.location.hash}`);
-});

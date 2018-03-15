@@ -21,14 +21,16 @@ export default class Controller {
       case 'completed':
         currentTodos = this.model.getCompleted();
         break;
-      case '':
+      default:
         currentTodos = this.model.todos;
     }
-    console.log(this.model.todos);
+    this.view.setToggleAllState(this.model.allComplete());
+    this.view.setChosenFilter(route);
     this.view.setMainVisibility(this.model.todos.length);
     this.view.setFooterVisibility(this.model.todos.length);
+    this.view.setClearButtVisibility(this.model.getCompleted().length);
     this.view.renderList(currentTodos);
-    this.view.updateActiveItems(this.model.getIncompleted().length);
+    this.view.updateActiveItemsField(this.model.getIncompleted().length);
   }
 
   newToDo(title) {
