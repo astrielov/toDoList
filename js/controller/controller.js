@@ -1,51 +1,63 @@
-import { setListener, qs } from '../helpers/helpers';
-
 export default class Controller {
   constructor(model, view) {
     this.model = model;
     this.view = view;
 
-    setListener(this.view.inputNewTodo, 'change', this.newToDo);
-    // setListener(this.view.inputNewTodo, 'click', this.newToDo);
-    // setListener(this.view.inputNewTodo, 'click', this.newToDo);
-    // setListener(this.view.inputNewTodo, 'click', this.newToDo);
+    this.view.listenToggleAll(this.toggleAll.bind(this));
+    this.view.listenNewToDo(this.newToDo.bind(this));
+    this.view.listenToItemChange(this.endEditItem.bind(this));
+    this.view.listenToItemRemove(this.removeItem.bind(this));
+    this.view.listenToItemToggle(this.toggleItem.bind(this));
+    this.view.listenToRemoveCompleted(this.removeCompleted.bind(this));
   }
 
-  setView() {
-
+  setView(raw = document.location.hash) {
+    const route = raw.replace(/^#\//, '');
+    let currentTodos;
+    switch (route) {
+      case 'active':
+        currentTodos = this.model.getIncompleted();
+        break;
+      case 'completed':
+        currentTodos = this.model.getCompleted();
+        break;
+      case '':
+        currentTodos = this.model.todos;
+    }
+    console.log(this.model.todos);
+    this.view.setMainVisibility(this.model.todos.length);
+    this.view.setFooterVisibility(this.model.todos.length);
+    this.view.renderList(currentTodos);
+    this.view.updateActiveItems(this.model.getIncompleted().length);
   }
 
-  renderList(todos) {
-    const fragment = document.createDocumentFragment();
-    todos.forEach((todo) => {
-      const li = document.createElement('li');
-      li.innerHTML = this.view.ItemTemplate(todo.title);
-      // setListener(qs('label', li), 'dblclick', this.editItem(todo.id));
-      // setListener(qs('edit', li), 'change', this.endEditItem(todo.id));
-      // setListener(qs('.toggle', li), 'click', this.view.toggleComplete());
-      fragment.appendChild(li);
-      }, '');
-    this.view.changeListContent(fragment);
+  newToDo(title) {
+    this.model.addItem(title);
+    this.setView();
   }
 
-  editItem(id) {
-
+  endEditItem(title, id) {
+    this.model.setItemTitle(title, id);
+    this.setView();
   }
 
-  endEditItem() {
-
+  toggleAll(completed) {
+    this.model.setAllCompletion(completed);
+    this.setView();
   }
 
-  newToDo() {
-    const todoTitle = this.view.inputNewTodo.value;
-    this.view.clearNewToDoInput();
-    this.model.addItem(todoTitle);
-    this.updateActiveItems();
+  toggleItem(id) {
+    this.model.toggleItem(id);
+    this.setView();
   }
 
-  updateActiveItems() {
-    const activeItems = this.model.activeItems;
-    const htmlToPaste = this.view.CountFieldTemplate(activeItems);
-    this.view.counter.innerHTML = htmlToPaste;
+  removeItem(id) {
+    this.model.removeItem(id);
+    this.setView();
+  }
+
+  removeCompleted() {
+    this.model.removeCompleted();
+    this.setView();
   }
 }

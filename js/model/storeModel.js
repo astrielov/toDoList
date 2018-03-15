@@ -1,9 +1,8 @@
-import ItemModel from './itemModel';
+import generUniqId from '../helpers/idGenerator';
 
 export default class StoreModel {
   constructor(storageVarName) {
     this.todos = [];
-    this.activeItems = 0;
 
     this.pushToStorage = () => {
       localStorage.setItem(storageVarName, JSON.stringify(this.todos));
@@ -11,28 +10,22 @@ export default class StoreModel {
 
     this.pullFromStorage = () => {
       this.todos = JSON.parse(localStorage.getItem(storageVarName) || '[]');
-      this.updateActiveItems();
     };
 
     this.pullFromStorage();
   }
 
   getCompleted() {
-    return this.todos.filter(todo => todo.isCompleted());
+    return this.todos.filter(todo => todo.completed);
   }
 
   getIncompleted() {
-    return this.todos.filter(todo => !todo.isCompleted());
+    return this.todos.filter(todo => !todo.completed);
   }
 
-  setAllComplete() {
-    this.todos.forEach(todo => todo.setCompleted());
-    this.updateActiveItems();
-  }
-
-  setAllIncomplete() {
-    this.todos.forEach(todo => todo.setIncompleted());
-    this.updateActiveItems();
+  setAllCompletion(completed) {
+    this.todos.forEach(todo => todo.completed = completed);
+    this.pushToStorage();
   }
 
   allComplete() {
@@ -51,17 +44,21 @@ export default class StoreModel {
   addItem(title) {
     title = title.trim();
     if (title) {
-      this.todos.push(new ItemModel(title));
+      const item = {
+        title,
+        id: generUniqId(),
+        completed: false,
+      };
+      this.todos.push(item);
       this.pushToStorage();
-      this.updateActiveItems();
     }
   }
 
   setItemTitle(title, id) {
     title = title.trim();
-    const item = this.todos.find(todo => !todo.id.localeCompare(id));
+    const todo = this.todos.find(todo => Object.is(todo.id, id));
     if (title) {
-      item.setTitle(title);
+      todo.title = title;
       this.pushToStorage();
     } else {
       this.removeItem(id);
@@ -70,15 +67,19 @@ export default class StoreModel {
 
   removeItem(id) {
     this.todos.forEach((todo, index) => {
-      if (todo.id.localeCompare(id) === 0) {
+      if (Object.is(todo.id, id)) {
         this.todos.splice(index, 1);
       }
     });
     this.pushToStorage();
-    this.updateActiveItems();
   }
 
-  updateActiveItems() {
-    this.activeItems = this.getIncompleted().length;
+  toggleItem(id) {
+    this.todos.forEach(todo => {
+      if (Object.is(todo.id, id)) {
+        todo.completed = !todo.completed;
+        this.pushToStorage();
+      }
+    })
   }
 }
