@@ -24,16 +24,12 @@ export default class StoreModel {
   }
 
   setAllCompletion(completed) {
-    this.todos.forEach(todo => todo.completed = completed);
+    this.todos.forEach((item) => { item.completed = completed; });
     this.pushToStorage();
   }
 
   allComplete() {
     return this.getCompleted().length === this.todos.length;
-  }
-
-  allIncomplete() {
-    return this.getIncompleted().length === this.todos.length;
   }
 
   removeCompleted() {
@@ -56,7 +52,7 @@ export default class StoreModel {
 
   setItemTitle(title, id) {
     title = title.trim();
-    const todo = this.todos.find(todo => Object.is(todo.id, id));
+    const todo = this.todos.find(item => Object.is(item.id, id));
     if (title) {
       todo.title = title;
       this.pushToStorage();
@@ -75,11 +71,11 @@ export default class StoreModel {
   }
 
   toggleItem(id) {
-    this.todos.forEach(todo => {
+    this.todos.forEach((todo) => {
       if (Object.is(todo.id, id)) {
         todo.completed = !todo.completed;
         this.pushToStorage();
       }
-    })
+    });
   }
 }
