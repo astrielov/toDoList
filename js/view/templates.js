@@ -16,15 +16,15 @@ export default class Templates {
       qs('.toggle', li).checked = true;
     }
 
-
     return li;
   }
 
   static newTodoCountSpan(itemsAmount) {
     const counter = document.createElement('span');
+    const suffix = itemsAmount % 10 === 1 ? '' : 's';
 
     counter.classList.add('todo-count');
-    counter.innerHTML = `<strong>${itemsAmount}</strong> item${itemsAmount % 10 === 1 ? '' : 's'} left`;
+    counter.innerHTML = `<strong>${itemsAmount}</strong> item${suffix} left`;
 
     return counter;
   }
