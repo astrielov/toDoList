@@ -4,6 +4,6 @@ function s4() {
     .substring(1);
 }
 
-export default function generUniqId() {
+export function generUniqId() {
   return `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
 }

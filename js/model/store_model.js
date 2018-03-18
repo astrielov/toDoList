@@ -1,4 +1,4 @@
-import generUniqId from '../helpers/idGenerator';
+import { generUniqId } from '../helpers/id_generator';
 
 export default class StoreModel {
   constructor(storageVarName) {
@@ -24,7 +24,7 @@ export default class StoreModel {
   }
 
   setAllCompletion(completed) {
-    this.todos.forEach((item) => { item.completed = completed; });
+    this.todos.forEach((item) => { item.completed = !!completed; });
     this.pushToStorage();
   }
 

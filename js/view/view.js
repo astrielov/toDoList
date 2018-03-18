@@ -1,4 +1,3 @@
-/* eslint-disable no-extra-boolean-cast */
 import { qs, setListener } from '../helpers/helpers';
 
 export default class View {
@@ -16,15 +15,15 @@ export default class View {
   }
 
   setMainVisibility(visible) {
-    this.sectionMain.style.display = !!visible ? 'block' : 'none';
+    this.sectionMain.style.display = visible ? 'block' : 'none';
   }
 
   setFooterVisibility(visible) {
-    this.footer.style.display = !!visible ? 'block' : 'none';
+    this.footer.style.display = visible ? 'block' : 'none';
   }
 
   setClearButtVisibility(visible) {
-    this.buttonClearCompleted.style.display = !!visible ? 'block' : 'none';
+    this.buttonClearCompleted.style.display = visible ? 'block' : 'none';
   }
 
   setToggleAllState(allComplete) {
@@ -51,7 +50,7 @@ export default class View {
    * Wipe old ToDos and paste the new ones
    * @param fragment - documentFragment
    */
-  swapListContent(fragment) {
+  setListContent(fragment) {
     let child = this.ulTodoList.firstChild;
     while (child) {
       this.ulTodoList.removeChild(child);
@@ -156,7 +155,7 @@ export default class View {
       const li = this.templates.constructor.newItemLi(todo);
       fragment.appendChild(li);
     });
-    this.swapListContent(fragment);
+    this.setListContent(fragment);
   }
 
   updateActiveItemsField(activeItems) {

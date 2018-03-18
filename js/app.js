@@ -1,5 +1,5 @@
 import { setListener } from './helpers/helpers';
-import StoreModel from './model/storeModel';
+import StoreModel from './model/store_model';
 import Templates from './view/templates';
 import View from './view/view';
 import Controller from './controller/controller';

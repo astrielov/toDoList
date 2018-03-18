@@ -12,17 +12,20 @@
   "eslintConfig": {
     "extends": "airbnb-base",
     "env": {
-      "es6": true
+      "es6": true,
+      "browser": true
     },
     "plugins": [
       "ava"
     ],
     "rules": {
+      "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+      "import/prefer-default-export": false,
       "no-param-reassign": 0,
       "ava/assertion-arguments": "error",
       "ava/max-asserts": [
-        "off",
-        5
+        "error",
+        1
       ],
       "ava/no-async-fn-without-await": "error",
       "ava/no-cb-test": "off",
@@ -53,23 +56,9 @@
     "parserOptions": {
       "ecmaVersion": 2017,
       "sourceType": "module"
-    },
-    "globals": {
-      "document": true,
-      "window": true,
-      "localStorage": true,
-      "fetch": true,
-      "Option": true,
-      "Event": true,
-      "CustomEvent": true
     }
   },
   "ava": {
-    "files": [
-      "./js/model/tests/*.js",
-      "./js/controller/tests/*.js",
-      "./js/helpers/tests/*.js"
-    ],
     "require": [
       "@babel/register"
     ]
