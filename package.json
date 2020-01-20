@@ -71,7 +71,7 @@
   "author": "astrielov",
   "license": "ISC",
   "devDependencies": {
-    "@ava/babel-preset-stage-4": "^1.1.0",
+    "@ava/babel-preset-stage-4": "^4.0.0",
     "@babel/core": "^7.0.0-beta.39",
     "@babel/register": "^7.0.0-beta.39",
     "ava": "^0.25.0",
