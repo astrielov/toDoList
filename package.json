@@ -80,7 +80,7 @@
     "eslint-plugin-ava": "^4.5.1",
     "eslint-plugin-import": "^2.8.0",
     "mock-local-storage": "^1.0.5",
-    "sinon": "^4.4.6",
+    "sinon": "^9.2.0",
     "webpack": "^4.0.1",
     "webpack-cli": "^2.0.9"
   },
