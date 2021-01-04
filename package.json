@@ -74,7 +74,7 @@
     "@ava/babel-preset-stage-4": "^1.1.0",
     "@babel/core": "^7.0.0-beta.39",
     "@babel/register": "^7.0.0-beta.39",
-    "ava": "^0.25.0",
+    "ava": "^3.15.0",
     "eslint": "^4.18.2",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-ava": "^4.5.1",
