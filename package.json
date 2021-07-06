@@ -85,7 +85,7 @@
     "webpack-cli": "^2.0.9"
   },
   "dependencies": {
-    "electron": "~1.8.2",
+    "electron": "~13.1.6",
     "todomvc-app-css": "^2.0.0",
     "todomvc-common": "^1.0.0"
   }
